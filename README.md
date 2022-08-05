@@ -1,5 +1,6 @@
 # LESSR
-It stands for Lead's Embedded Scriptable Software Renderer. The goal of this project is to create a somewhat scriptable software renderer for (embedded) systems without dedicated rendering hardware, without using OpenGL or the likes. It also serves as a way for me to understand how 3D rendering works better.
+#### Lead's Embedded Scriptable Software Renderer
+The goal of this project is to create a somewhat scriptable software renderer for (embedded) systems without dedicated rendering hardware, without using OpenGL or the likes. It also serves as a way for me to understand how 3D rendering works better.
 
 This project is mostly intended for research only, however actual use is plausible. Keep in mind that this is not quite fast and could definitely use some optimizations.
 # Usage

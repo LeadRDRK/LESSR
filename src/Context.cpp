@@ -85,7 +85,7 @@ void Context::bindBuffer(const void* ptr, BufferType type)
         indexBuffer = reinterpret_cast<const uint32_t*>(ptr);
 }
 
-void Context::vertexLayout(const VertexLayout& layout)
+void Context::vertexLayout(const VertexLayout* layout)
 {
     shaderCtx.vertexLayout = layout;
 }

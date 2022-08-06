@@ -25,8 +25,6 @@ public:
     void outPosition(const Vector4& pos);
     void outColor(const Color4& color);
 
-    const VertexLayout& layout() const;
-
     uint32_t vertexNum() const;
 
 private:
@@ -41,7 +39,7 @@ private:
     void reset();
 
     const void* vertexData;
-    VertexLayout vertexLayout;
+    const VertexLayout* vertexLayout;
 
     struct Varying
     {

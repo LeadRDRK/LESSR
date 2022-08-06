@@ -34,7 +34,7 @@ public:
     void useProgram(Program* program);
 
     void bindBuffer(const void* ptr, BufferType type);
-    void vertexLayout(const VertexLayout& layout);
+    void vertexLayout(const VertexLayout* layout);
 
     void uniform(DataType type, const std::string& name, const void* data);
     void bindTexture(const std::string& name, const ImageData* texture);

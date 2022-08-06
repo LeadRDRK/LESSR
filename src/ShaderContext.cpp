@@ -9,8 +9,8 @@ const void* ShaderContext::attribute_i(DataType type, const std::string& name) c
 {
     if (isFragment) return nullptr;
 
-    auto it = vertexLayout.find(name);
-    if (it != vertexLayout.end())
+    auto it = vertexLayout->find(name);
+    if (it != vertexLayout->end())
     {
         auto& attrib = it->second;
         if (attrib.type == type)
@@ -92,11 +92,6 @@ void ShaderContext::outColor(const Color4& color)
 {
     if (!isFragment) return;
     _outColor = color;
-}
-
-const VertexLayout& ShaderContext::layout() const
-{
-    return vertexLayout;
 }
 
 uint32_t ShaderContext::vertexNum() const

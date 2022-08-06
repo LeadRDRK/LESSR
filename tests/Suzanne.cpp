@@ -27,6 +27,10 @@ public:
 
 };
 
+static const VertexLayout vertexLayout = {
+    {"position", {VECTOR3, sizeof(Vector3), 0}}
+};
+
 int main(int argc, char** argv)
 {
     Context ctx;
@@ -44,7 +48,7 @@ int main(int argc, char** argv)
     ctx.useProgram(&program);
 
     ctx.bindBuffer(Suzanne, ARRAY_BUFFER);
-    ctx.vertexLayout({{"position", {VECTOR3, sizeof(Vector3), 0}}});
+    ctx.vertexLayout(&vertexLayout);
     ctx.drawArrays(TRIANGLES, 0, VERTEX_COUNT);
 
     stbi_write_png("suzanne.png", RES_W, RES_H, 4, fb, RES_W*4);

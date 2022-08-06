@@ -64,7 +64,7 @@ int main(int argc, char** argv)
     ctx.useProgram(&program);
 
     ctx.bindBuffer(vertices, ARRAY_BUFFER);
-    ctx.vertexLayout(vertexLayout);
+    ctx.vertexLayout(&vertexLayout);
 
     ctx.drawArrays(TRIANGLES, 0, sizeof(vertices)/sizeof(vertices[0]));
     stbi_write_png("triangle.png", RES_W, RES_H, 4, fb, RES_W*4);

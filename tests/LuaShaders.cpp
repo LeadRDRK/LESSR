@@ -130,7 +130,7 @@ int main(int argc, char** argv)
 
     ctx.bindBuffer(vertices, ARRAY_BUFFER);
     ctx.bindBuffer(indices, ELEMENT_ARRAY_BUFFER);
-    ctx.vertexLayout(vertexLayout);
+    ctx.vertexLayout(&vertexLayout);
 
     ctx.uniform(MATRIX4, "u_mpMatrix", &mpMatrix);
     ctx.bindTexture("u_texture", &image);

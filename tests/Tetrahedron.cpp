@@ -63,9 +63,9 @@ public:
         auto a_position = ctx.attribute<Vector3>(VECTOR3, "a_position");
         auto a_texCoord = ctx.attribute<Vector2>(VECTOR2, "a_texCoord");
         auto v_texCoord = ctx.varying  <Vector2>(VECTOR2, "v_texCoord");
-        auto u_vpMatrix = ctx.uniform  <Matrix4>(MATRIX4, "u_vpMatrix");
+        auto u_mpMatrix = ctx.uniform  <Matrix4>(MATRIX4, "u_mpMatrix");
 
-        Vector4 res = (*u_vpMatrix) * (*a_position);
+        Vector4 res = (*u_mpMatrix) * (*a_position);
         ctx.outPosition(res);
         *v_texCoord = *a_texCoord;
     }
@@ -111,11 +111,11 @@ int main(int argc, char** argv)
     Matrix4::createPerspective(90.f, (float)RES_W/RES_H, -1.f, 1.f, &projMatrix);
 
     float radAngle = MATH_DEG_TO_RAD(angle);
-    Matrix4 viewMatrix;
-    Matrix4::createFromEuler(radAngle, radAngle * 2, 0, &viewMatrix);
+    Matrix4 modelMatrix;
+    Matrix4::createFromEuler(radAngle, radAngle * 2, 0, &modelMatrix);
 
-    Matrix4 vpMatrix;
-    Matrix4::multiply(viewMatrix, projMatrix, &vpMatrix);
+    Matrix4 mpMatrix;
+    Matrix4::multiply(modelMatrix, projMatrix, &mpMatrix);
 
     Context ctx;
     ctx.enable(BLEND);
@@ -139,7 +139,7 @@ int main(int argc, char** argv)
     ctx.bindBuffer(indices, ELEMENT_ARRAY_BUFFER);
     ctx.vertexLayout(vertexLayout);
 
-    ctx.uniform(MATRIX4, "u_vpMatrix", &vpMatrix);
+    ctx.uniform(MATRIX4, "u_mpMatrix", &mpMatrix);
     ctx.bindTexture("u_texture", &image);
 
     ctx.drawElements(TRIANGLES, 0, sizeof(indices)/sizeof(indices[0]));

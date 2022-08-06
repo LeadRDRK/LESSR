@@ -60,9 +60,9 @@ static const char* shadersScript =
     "function vertexShader()\n"
         "local a_position = attribute(DataType.VECTOR3, 'a_position')\n"
         "local a_texCoord = attribute(DataType.VECTOR2, 'a_texCoord')\n"
-        "local u_vpMatrix = uniform  (DataType.MATRIX4, 'u_vpMatrix')\n"
+        "local u_mpMatrix = uniform  (DataType.MATRIX4, 'u_mpMatrix')\n"
         "varying(DataType.VECTOR2, 'v_texCoord', a_texCoord)\n"
-        "return u_vpMatrix * Vector4.new(a_position)\n"
+        "return u_mpMatrix * Vector4.new(a_position)\n"
     "end\n"
 
     "function fragmentShader(fragCoord)\n"
@@ -102,11 +102,11 @@ int main(int argc, char** argv)
     Matrix4::createPerspective(90.f, (float)RES_W/RES_H, -1.f, 1.f, &projMatrix);
 
     float radAngle = MATH_DEG_TO_RAD(angle);
-    Matrix4 viewMatrix;
-    Matrix4::createFromEuler(radAngle, radAngle * 2, 0, &viewMatrix);
+    Matrix4 modelMatrix;
+    Matrix4::createFromEuler(radAngle, radAngle * 2, 0, &modelMatrix);
 
-    Matrix4 vpMatrix;
-    Matrix4::multiply(viewMatrix, projMatrix, &vpMatrix);
+    Matrix4 mpMatrix;
+    Matrix4::multiply(modelMatrix, projMatrix, &mpMatrix);
 
     Context ctx;
     ctx.enable(BLEND);
@@ -132,7 +132,7 @@ int main(int argc, char** argv)
     ctx.bindBuffer(indices, ELEMENT_ARRAY_BUFFER);
     ctx.vertexLayout(vertexLayout);
 
-    ctx.uniform(MATRIX4, "u_vpMatrix", &vpMatrix);
+    ctx.uniform(MATRIX4, "u_mpMatrix", &mpMatrix);
     ctx.bindTexture("u_texture", &image);
 
     ctx.drawElements(TRIANGLES, 0, sizeof(indices)/sizeof(indices[0]));

@@ -92,7 +92,16 @@ void Context::vertexLayout(const VertexLayout* layout)
 
 void Context::uniform(DataType type, const std::string& name, const void* data)
 {
-    shaderCtx.uniforms[name] = { type, data };
+    auto it = shaderCtx.uniforms.find(name);
+    if (it != shaderCtx.uniforms.end())
+    {
+        if (data)
+            it->second = { type, data };
+        else
+            shaderCtx.uniforms.erase(it);
+    }
+    else if (data)
+        shaderCtx.uniforms[name] = { type, data };
 }
 
 void Context::bindTexture(const std::string& name, const ImageData* texture)
